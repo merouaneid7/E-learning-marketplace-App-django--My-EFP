@@ -1,0 +1,62 @@
+{% extends 'base1.html' %}
+
+{% block title %}- Log in{% endblock %}
+
+{% block content %}
+
+<!-- PAGE TITLE
+    ================================================== -->
+<header class="bg-gradient-to-r from-blue-500 to-purple-500 py-20 text-white text-center">
+    <div class="container mx-auto">
+        <h1 class="text-4xl md:text-6xl lg:text-8xl font-bold mb-4">Login</h1>
+        <nav class="text-sm">
+            <a href="http://127.0.0.1:8000/" class="text-gray-300">Home</a>
+            <span class="mx-2 text-gray-300">/</span>
+            <span class="text-gray-100">Login</span>
+        </nav>
+    </div>
+    
+</header>
+
+<!-- LOGIN
+    ================================================== -->
+<div class="container mx-auto mt-8 flex justify-center">
+    <form class="max-w-sm mx-auto" method="post" action="{% url 'doLogin' %}">
+        {% include 'components/msg.html' %}
+
+        {% csrf_token %}
+        <!-- Email -->
+        <div class="mb-5">
+            <label for="modalSigninEmail1" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+            <input type="email" class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="modalSigninEmail1" placeholder="creativelayers" name="email" required />
+        </div>
+
+        <!-- Password -->
+        <div class="mb-5">
+            <label for="modalSigninPassword1" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+            <input type="password" class="w-96 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" id="modalSigninPassword1" placeholder="**********" name="password" required />
+        </div>
+
+        <div class="d-flex align-items-center mb-5 font-size-sm">
+            <div class="form-check">
+                <input class="form-check-input text-gray-800" type="checkbox" id="autoSizingCheck1" name="remembreme" />
+                <label class="form-check-label text-gray-800" for="autoSizingCheck1">Remember me</label>
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" name="btnsignin" type="submit">LOGIN</button>
+    </form>
+</div>
+
+<!-- Forgot Password -->
+<div class="container mx-auto text-center">
+    <a class="text-gray-800" href="{% url 'password_reset' %}">Forgot Password?</a>
+</div>
+
+<!-- Text -->
+<p class="mb-10 font-size-sm text-center">
+    Don't have an account? <a class="text-underline" href="{% url 'register' %}">Sign up</a>
+</p>
+
+{% endblock %}

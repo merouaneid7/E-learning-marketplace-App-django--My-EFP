@@ -1,0 +1,106 @@
+{% extends 'base1.html' %}
+{% block title %}- Course{% endblock %}
+{% load static %}
+{% block content %}
+{% load course_tags %}
+
+
+
+<div class="mt-40">
+    <div class="flex items-center mb-6 xl:mb-0">
+        <p class="mb-0">We found <span class="text-dark">{{ coursenumber }}</span> available for you</p>
+        <div class="ml-auto flex-wrap flex items-center">
+            <div class="mb-4 xl:mb-0 ms-6">
+                <div class="border rounded flex items-center h-50p">
+                    <span class="ps-5">Sort by:</span>
+                    <select id="sortingDropdown" class="form-select form-select-sm text-dark border-0 ps-1 bg-transparent flex-grow-1 shadow-none dropdown-menu-end">
+                        <option value="default">Default</option>
+                        <option value="newCourses">New Courses</option>
+                        <option value="priceLowToHigh">Price Low to High</option>
+                        <option value="priceHighToLow">Price High to Low</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="">
+        <div class="col-span-1 md:col-span-2 lg:col-span-1">
+            <!-- SIDEBAR FILTER -->
+            <div class="vertical-scroll" id="courseSidebar">
+                <div class="tab-content flickity-tab" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+                        <!-- Items -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
+                            {% for i in course %}
+                            <div class="p-4" data-category="{{ i.category.name | slugify }}">
+                                <!-- Card -->
+                                <div id="course-card-{{ i.title | slugify }}" class="border shadow p-2 rounded-lg transition duration-500 ease-in-out transform hover:scale-105">
+                                    <!-- Image -->
+                                    <div class="relative">
+                                        <div class="absolute top-0 right-0 mt-4 me-4 space-x-1">
+                                        </div>
+                                        <img src="{{i.featured_image.url}}" alt="Image" class="w-full rounded-md mb-4">
+                                    </div>
+                                    <!-- Body -->
+                                    <a href="{{i.get_absolute_url}}" class="text-inherit">
+                                        <h3 class="h5 text-xl font-bold">{{i.title}}</h3>
+                                        <p class="text-muted mb-0 opacity-75">By {{i.author}}</p>
+                                        <h3 class="h5 font-bold mb-5">
+                                          {% if i.price == 0 %}
+                                          <div class="">
+                                              <ins class="no-underline"><span>FREE</span></ins>
+                                          </div>
+                                          {% else %}
+                                          <div class="">
+                                              <del class="font-size-sm opacity-70">{{ i.price }}DH</del>
+                                              {% discount_calculation i.price i.discount as discounted_price %}
+                                              <ins class="no-underline ">{{ discounted_price }}DH</ins>
+                                          </div>
+                                          {% endif %}
+                                    </a>
+                                    <!-- Buttons -->
+                                    <div class=" text-black">
+                                        <a href="{{i.get_absolute_url}}" class="btn btn-link btn-sm px-0">
+                                            Learn more →
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-span-1 md:col-span-2 lg:col-span-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="filteredCourses">
+                <!-- ... (remaining unchanged) ... -->
+            </div>
+
+            <!-- PAGINATION -->
+            <nav class="mb-11" aria-label="Page navigationa">
+                <ul class="pagination justify-center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,176 @@
+{% extends 'base1.html' %}
+{% load static tailwind_tags %}
+{% load course_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ik Learn | home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% tailwind_css %}
+</head>
+
+<style>
+    body {
+        background: linear-gradient(90deg, rgba(255, 248, 245, 1) 0%, rgba(255, 251, 250, 1) 26%, rgba(255, 255, 255, 1) 100%);
+    }
+</style>
+
+{% block content %}
+
+<div class="bg-white">
+    <div>
+        <div class="relative isolate px-6 pt-14 lg:px-8">
+            <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+                <div class="hidden sm:mb-8 sm:flex sm:justify-center">
+                    <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                        Skills for your present & your future. . <a href="http://127.0.0.1:8000/accounts/register" class="font-semibold text-black"><span class="absolute inset-0"
+                                aria-hidden="true"></span>Get started with us <span aria-hidden="true">&rarr;</span></a>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">Code. Create. Conquer.<br> Empower your tech journey
+                        with IK Learn </h1>
+                    <p class="mt-6 text-lg leading-8 text-gray-600">Empower your tech journey with IK Learn</p>
+                    <div class="mt-10 flex items-center justify-center gap-x-6">
+                        
+                                <button  class="w-15 h-15 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><a href="http://127.0.0.1:8000/accounts/register">Get started</a></button>
+                        <a href="http://127.0.0.1:8000/about" class="text-sm font-semibold leading-6 text-gray-900">Learn more <span aria-hidden="true">→</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FEATURED PRODUCT ================================================== -->
+
+    <section class="pt-5 pb-9 py-md-11 bg-white">
+        <div class="container container-wd">
+            <div class="flex flex-wrap items-end mb-5">
+                <div class="w-full mb-8 xl:w-auto xl:mb-10 mx-auto text-center">
+                    <h1 class="text-2xl font-bold tracking-tight text-gray-900 ">Explore diverse courses for every interest and skill level</h1>
+                    <p class="text-lg  mb-0">Discover your perfect program in our courses.</p>
+                </div>
+
+                
+            </div>
+
+            <div class="tab-content flickity-tab" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+                    <!-- Items -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
+                        {% for i in course|slice:":8" %}
+                        <div class="p-4" data-category="{{ i.category.name | slugify }}">
+                            <!-- Card -->
+                            <div id="course-card-{{ i.title | slugify }}" class="border shadow p-2 rounded-lg transition duration-500 ease-in-out transform hover:scale-105">
+                                <!-- Image -->
+                                <div class="relative">
+                                    <div class="absolute top-0 right-0 mt-4 me-4 space-x-1">
+                                    </div>
+                                    <img src="{{i.featured_image.url}}" alt="Image" class="w-full rounded-md mb-4">
+                                </div>
+                                <!-- Body -->
+                                <a href="{{i.get_absolute_url}}" class="text-inherit">
+                                    <h3 class="h5 text-xl font-bold">{{i.title}}</h3>
+                                    <p class="text-muted mb-0 opacity-75">By {{i.author}}</p>
+                                    <h3 class="h5 font-bold mb-5">
+                                      {% if i.price == 0 %}
+                                      <div class="">
+                                          <ins class="no-underline"><span>FREE</span></ins>
+                                      </div>
+                                      {% else %}
+                                      <div class="">
+                                          <del class="font-size-sm opacity-70">{{ i.price }}DH</del>
+                                          {% discount_calculation i.price i.discount as discounted_price %}
+                                          <ins class="no-underline ">{{ discounted_price }}DH</ins>
+                                      </div>
+                                      {% endif %}
+                                </a>
+                                <!-- Buttons -->
+                                <div class=" text-black">
+                                    <a href="{{i.get_absolute_url}}" class="btn btn-link btn-sm px-0">
+                                        Learn more →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- top  cat ================================================== -->
+    <section class="pt-5 pb-9 ml-2 py-md-11 bg-white">
+      <div class="container container-wd">
+        <div class="flex flex-wrap items-end mb-5">
+            <div class="w-full mb-8 xl:w-auto xl:mb-5 mx-auto text-center">
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900 ">Top categories</h1>
+            </div>
+    
+            <div class="flex justify-center w-full">
+                {% for i in category %}
+                <div class="col mb-md-6 mb-4 px-2 px-md-4">
+                    <!-- Card -->
+                    <a href="{% url 'category_page' i.id %}" class="card bg-lavender hover-gradient-1 rounded-lg p-md-5 p-3 h-210p text-center lift">
+                        <!-- Image -->
+                        <div class="mt-7 text-gigas display-4">
+                            <i class="{{i.icon}}"></i>
+                            <!-- Footer -->
+                            <div class="card-footer px-0 pb-0 pt-4">
+                              <button type="button" class="w-15 h-15 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">{{i.name}}</button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    </section>
+
+</div>
+<section class="py-6 md:py-11relative jarallax" data-jarallax data-speed=".8" style="background-image: none;">
+  <div class="container text-center xl:py-4">
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900 ">Get Projects recommendations</h1>
+      <div class="text-lg mb-6 md:mb-4">find Projects ideas using our AI technlogie</div>
+      <div class="mx-auto">
+          <a href="" class="w-15 h-15 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">GET STARTED NOW</a>
+      </div>
+  </div>
+  <div id="jarallax-container-0" class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-(-100)">
+      <div class="absolute top-0 left-0 w-full h-full bg-cover bg-no-repeat">
+          
+      </div>
+  </div>
+</section>
+<!-- Become an instructor ================================================== -->
+
+
+<section class="bg-white ">
+    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 grid lg:grid-cols-2 gap-8 lg:gap-16">
+        <div class="flex flex-col justify-center">
+            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-black">Become an instructor</h1>
+            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Instructors from around the world teach millions of learners on Udemy. We provide the tools and skills to teach what you love.</p>
+            <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0">
+                <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                    Start teaching today →
+                </a>
+                
+            </div>
+        </div>
+        <div>
+            <img class="mx-auto  lg:max-w-xl h-64 rounded-lg sm:h-96 " src="static\assets\img\instructor-1x-v3.jpg">
+            
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

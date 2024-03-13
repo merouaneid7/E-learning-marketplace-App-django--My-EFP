@@ -1,0 +1,70 @@
+{% extends 'base1.html' %}
+{% load course_tags %}
+{% block content %}
+
+<h1 class="sm: text-2xl font-bold text-gray-900 sm:text-3xl text-center mt-40">Pay with your paypal</h1>
+<div id="paypal-button-container" class="mt-40 ml-96 mb-96"></div>
+
+<script
+    src="https://www.paypal.com/sdk/js?client-id=AUWN8WcLRCT84MzxALJlMsKanYvhBdZGYty7RZAw7ed9U9QtIxVsV0Q-ku7ENlv4hW0zwwsPZ0_QD3Gr&currency=USD"></script>
+
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+
+
+    "{% discount_calculation course.price course.discount as discounted_price %}"
+    var total = '{{discounted_price }}'
+    var course = '{{course.slug}}'
+
+    function complete() {
+        var url = "{% url 'complete' %}"
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({ 'course': course })
+
+        })
+    }
+    paypal.Buttons({
+
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: total
+                    }
+                }]
+            })
+        },
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                complete()
+                alert('transaction completed by ' + details.payer.name.given_name + '!');
+            }
+            )
+        }
+    }).render('#paypal-button-container')
+
+
+</script>
+
+{% endblock %}
