@@ -66,6 +66,8 @@
                 <!-- Back to Course -->
                 <a href="{% url 'my-course' %}"
                     class="btn btn-sm btn-orange ms-md-6 px-6 mb-3 mb-md-0 flex-shrink-0">Back to Course</a>
+
+             
             </div>
         </div>
     </header>
@@ -93,7 +95,7 @@
 
                     </div>
 
-                    <img class="rounded shadow-light-lg" src="/{{video.thumbnail}}" alt="...">
+                    <img class="rounded shadow-light-lg" src="Media/Miniature/{{video.thumbnail}}" alt="...">
                 </a>
 
                 <h3 class="text-white">Course Description</h3>
@@ -119,7 +121,9 @@
                         </span>
                     </span>
                 </a>
+                <!--
 
+                
                 <h3 class="text-white mb-6">Comment</h3>
                 <ul class="list-unstyled pt-2">
                     <li class="media d-flex">
@@ -198,7 +202,7 @@
                         <button type="submit" class="btn btn-orange btn-block mw-md-300p">SUBMIT REVIEW</button>
                     </form>
                 </div>
-
+-->
             </div>
 
             <div class="col-lg-4">
@@ -228,8 +232,8 @@
                                             </svg>
 
                                         </span>
+                                        <span style="color: aliceblue;">{{lesson.name}}</span>
 
-                                        {{lesson.name}}
                                     </button>
                                 </h5>
                             </div>
@@ -262,7 +266,10 @@
                                         </div>
                                         <a href="?lecture={{video.id}}">
                                             <div class="ms-4">
-                                                {{video.title}}
+                                                <span style="color: aliceblue;">
+                                                    {{video.title}}
+                                                </span>
+
                                             </div>
                                         </a>
                                     </div>

@@ -4,6 +4,7 @@ from django.urls import path , include
 from .import views , user_login
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import add_course, formateur_list, formateur_detail, formateur_delete , add_to_group
 
 
 
@@ -34,6 +35,22 @@ urlpatterns = [
 
     path('category/<str:pk>', views.category_page , name='category_page'),
    
+    
+   
     path('logout/', views.logoutUser ,name='logout'),
     path('404',views.Page_not_found , name='404'),
+    
+
+    path('accounts/F_register',user_login.F_registre , name='F_register'),
+   
+    path('dashboard',views.author_dashboard , name='author_dashboard'),
+
+
+
+    path('formateurs', formateur_list, name='formateur_list'),
+    path('formateurs/<int:pk>/', formateur_detail, name='formateur_detail'),
+    path('formateurs/<int:pk>/delete/', formateur_delete, name='formateur_delete'),
+    path('formateurs/<int:formateur_id>/add_to_group/', add_to_group, name='add_to_group'),
+    path('add_course', add_course, name='add_course'),
+
 ] + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

@@ -8,7 +8,7 @@
     
     {% tailwind_css %}
 </head>
-<section class="py-12 sm:py-16"> 
+<section class="py-12 sm:py-16 mt-16"> 
     <div class="container mx-auto px-4">
       
       <div class="lg:col-gap-12 xl:col-gap-16 mt-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
@@ -41,6 +41,19 @@
             
             
           </div>
+          <div class="mt-5 flex items-center">
+            
+            <p class=" text-sm font-medium text-gray-500">Level: {{course.level}}</p>
+            
+            
+          </div>
+          <div class="mt-5 flex items-center">
+            
+            <p class=" text-sm font-medium text-gray-500">Language: {{course.language}}</p>
+            
+            
+          </div>
+          
           
   
           
@@ -66,7 +79,7 @@
             </button>
             {% else %}
             <button class="btn btn-orange btn-wide mb-4 mb-md-0 ms-md-3 flex-grow-1" type="button" name="button"
-                        disabled> ALREADY ENROLL</button>
+                        disabled><a href="http://127.0.0.1:8000/my-course" class="font-semibold">Alredy Enrolled</a> </button>
                     <button class="btn btn-success btn-wide mb-4 mb-md-0 ms-md-3 flex-grow-1" type="button"></button>
                     {% endif %}
                     {% endif %} 
@@ -74,6 +87,7 @@
           
   
           <ul class="mt-8 space-y-2">
+            <h2 class="text-2xl font-bold mb-6">This course includes</h2>
             <li class="flex items-center text-left text-sm font-medium text-gray-600">
               <svg class="mr-2 block h-5 w-5 align-middle text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" class=""></path>
@@ -90,7 +104,7 @@
           </ul>
         </div>
   
-        <div class="lg:col-span-3">
+        <div class="lg:col-span-3 mx-36">
           <div class="border-b border-gray-300">
             <nav class="flex gap-4">
               <a href="#" title="" class="border-b-2 border-gray-900 py-4 text-sm font-medium text-gray-900 hover:border-gray-400 hover:text-gray-800"> Description </a>
@@ -99,7 +113,7 @@
             </nav>
           </div>
   
-          <div class="mt-8 flow-root sm:mt-12">
+          <div class="mt-8 ">
             <h1 class="text-3xl font-bold">Course Description</h1>
             <p class="mt-4">{{course.description}}</p>
             <h1 class="mt-8 text-3xl font-bold">From the Fine Farms of Brazil</h1>

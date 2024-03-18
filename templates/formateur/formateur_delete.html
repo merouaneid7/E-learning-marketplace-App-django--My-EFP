@@ -1,0 +1,11 @@
+<!-- templates/formateur_delete.html -->
+{% extends 'base1.html' %}
+
+{% block content %}
+<h2>Delete Formateur</h2>
+<p>Are you sure you want to delete {{ formateur.name }}?</p>
+<form method="post" action="{% url 'formateur_delete' pk=formateur.pk %}">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+</form>
+{% endblock %}

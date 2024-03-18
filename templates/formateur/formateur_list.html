@@ -1,0 +1,45 @@
+<!-- templates/formateur_list.html -->
+{% extends 'base1.html' %}
+{% load static tailwind_tags %}
+<head>
+    {% tailwind_css %}
+</head>
+{% block content %}
+
+<div class="container my-40">
+    <div class="flex justify-center">
+        <div class="w-full">
+            
+
+            
+
+            <table class="w-full mt-4 table-auto  rounded-lg">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">#</th>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for formateur in formateurs %}
+                    <tr>
+                        <td class="border px-4 py-2">{{ formateur.id }}</td>
+                        <td class="border px-4 py-2">{{ formateur.name }}</td>
+                        <td class="border px-4 py-2">
+                            <a href="{% url 'formateur_detail' pk=formateur.id %}" class="inline-block px-3 py-1 text-sm leading-normal bg-blue-500 text-white rounded-lg hover:bg-blue-600">Details</a>
+                            <a href="{% url 'add_to_group' formateur_id=formateur.id %}" class="inline-block px-3 py-1 text-sm leading-normal bg-green-500 text-white rounded-lg hover:bg-green-600">Add to Group</a>
+                            <a href="{% url 'formateur_delete' pk=formateur.id %}" class="inline-block px-3 py-1 text-sm leading-normal bg-red-500 text-white rounded-lg hover:bg-red-600">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+            <a href="{% url 'F_register' %}" class="block w-full max-w-xs mx-auto mt-4 px-4 py-2 text-center bg-blue-500 text-white rounded-lg hover:bg-blue-600">Create New Formateur</a>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}

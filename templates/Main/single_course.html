@@ -1,11 +1,13 @@
-{% extends 'base1.html' %}
+{% extends 'base1html' %}
 {% block title %}- Course{% endblock %}
 {% load static %}
 {% block content %}
 {% load course_tags %}
 
 
-
+{% if not user.is_authenticated  %}
+<p>login first</p>
+{% else %}
 <div class="mt-40">
     <div class="flex items-center mb-6 xl:mb-0">
         <p class="mb-0">We found <span class="text-dark">{{ coursenumber }}</span> available for you</p>
@@ -104,3 +106,4 @@
 </div>
 
 {% endblock %}
+{% endif %}

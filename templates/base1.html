@@ -15,19 +15,33 @@
                               <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
                                 <div class="flex lg:flex-1">
                                   <a href="http://127.0.0.1:8000/" class="-m-1.5 p-1.5">
-                                    <h2 class="font-bold text-2xl mt-0">IK Learn</h2>
+                                    <h2 class="font-bold text-2xl mt-0 text-black">IK Learn</h2>
                                   </a>
                                 </div>
+                                {% if not user.is_authenticated %}
                                 <div class="hidden lg:flex lg:gap-x-12">
                                   <a href="http://127.0.0.1:8000/" class="text-sm font-semibold leading-6 text-gray-900">Home</a>
-                                  <!--<a href="http://127.0.0.1:8000/courselist" class="text-sm font-semibold leading-6 text-gray-900">Courses</a>-->
                                   <a href="http://127.0.0.1:8000/contact" class="text-sm font-semibold leading-6 text-gray-900">Contact Us</a>
                                   <a href="http://127.0.0.1:8000/about" class="text-sm font-semibold leading-6 text-gray-900">About</a>
+
                                 </div>
                                 <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                                  <button  class="w-15 h-15 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><a href="http://127.0.0.1:8000/accounts/login/">log in</a></button>
-                                  <button  class="w-15 h-15 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><a href="http://127.0.0.1:8000/accounts/register">Sign up</a></button>
+                                  <button  class="w-15 h-15 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none   font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><a href="http://127.0.0.1:8000/accounts/login/">log in</a></button>
+                                  <button  class="w-15 h-15 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none   font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><a href="http://127.0.0.1:8000/accounts/register">Sign up</a></button>
                                 </div>
+                                 {% else %} 
+                                 <div class="hidden lg:flex lg:gap-x-12">
+                                  <a href="http://127.0.0.1:8000/" class="text-sm font-semibold leading-6 text-gray-900">Home</a>
+                                  <a href="http://127.0.0.1:8000/contact" class="text-sm font-semibold leading-6 text-gray-900">Contact Us</a>
+                                  <a href="http://127.0.0.1:8000/about" class="text-sm font-semibold leading-6 text-gray-900">About</a>
+                                  <a href="http://127.0.0.1:8000/my-course" class="text-sm font-semibold leading-6 text-gray-900">My Courses</a>
+                                  
+                                </div>
+                                <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                                  <button  class="w-15 h-15 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><a href="http://127.0.0.1:8000/accounts/profile">Welcome , {{ user.last_name}}</button>
+                                  <button  class="w-15 h-15 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><a href="{% url 'logout' %}">Log out</a></button>
+                                </div>
+                                {% endif %}
                               </nav>
                                 </div>
                               </div>
@@ -55,7 +69,7 @@
                                           <div>
                                               <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
                                               <ul class="text-gray-500 dark:text-gray-400 font-medium">
-                                                  <li class="mb-4">
+                                                 <li class="mb-4">
                                                       <a href="#" class="hover:underline ">Github</a>
                                                   </li>
                                                   <li>

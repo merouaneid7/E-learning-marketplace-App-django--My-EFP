@@ -25,4 +25,3 @@ admin.site.register(Video)
 admin.site.register(Language)
 admin.site.register(UserCourse)
 
-

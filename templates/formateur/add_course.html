@@ -1,0 +1,75 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {%tailwind_css%}
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-screen-md mx-auto bg-white p-8 rounded-md shadow-md mt-8">
+        <h1 class="text-3xl text-center mb-8">Add Course</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="id_featured_image" class="font-bold">Featured Image</label><br>
+                {{ course_form.featured_image }}
+            </div>
+            <div class="mb-5">
+                <label for="id_featured_video" class="font-bold">Featured Video</label><br>
+                {{ course_form.featured_video }}
+            </div>
+            <div class="mb-4">
+                <label for="id_title" class="font-bold">Title</label><br>
+                {{ course_form.title }}
+            </div>
+            <div class="mb-4">
+                <label for="id_category" class="font-bold">Category</label><br>
+                {{ course_form.category }}
+            </div>
+            <div class="mb-4">
+                <label for="id_level" class="font-bold">Level</label><br>
+                {{ course_form.level }}
+            </div>
+            <div class="mb-4">
+                <label for="id_language" class="font-bold">Language</label><br>
+                {{ course_form.language }}
+            </div>
+            <div class="mb-4">
+                <label for="id_description" class="font-bold">Description</label><br>
+                {{ course_form.description }}
+            </div>
+            <div class="mb-4">
+                <label for="id_price" class="font-bold">Price</label><br>
+                {{ course_form.price }}
+            </div>
+            <div class="mb-4">
+                <label for="id_discount" class="font-bold">Discount</label><br>
+                {{ course_form.discount }}
+            </div>
+            <div class="mb-4">
+                <label for="id_deadline" class="font-bold">Deadline</label><br>
+                {{ course_form.deadline }}
+            </div>
+            <div class="mb-4">
+                <label for="id_certificate" class="font-bold">Certificate</label><br>
+                {{ course_form.certificate }}
+            </div>
+
+            <h2 class="text-2xl mb-4">Add Objectif</h2>
+            {{ objectif_form.as_p }}
+
+            <h2 class="text-2xl mb-4">Add Lesson</h2>
+            {{ lesson_form.as_p }}
+
+            <h2 class="text-2xl mb-4">Add Video</h2>
+            {{ video_form.as_p }}
+
+            <div class="mb-4">
+                <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    value="Save">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

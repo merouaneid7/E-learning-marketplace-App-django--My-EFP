@@ -3,13 +3,15 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from App.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate,login,logout
-
+from App.form import AuthorForm
+from App.models import Author
 
 def REGISTER(request):
     if request.method == "POST":
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
 
         # check email
         if User.objects.filter(email=email).exists():
@@ -20,6 +22,11 @@ def REGISTER(request):
         if User.objects.filter(username=username).exists():
            messages.warning(request,'Username are Already exists !')
            return redirect('register')
+        
+        # Check if password and confirm_password match
+        if password != confirm_password:
+            messages.warning(request, 'Passwords do not match!')
+            return redirect('register')
         
         user = User(
             username=username,
@@ -75,3 +82,25 @@ def PROFILE_UPDATE(request):
         return redirect('profile')
      
      
+def F_registre(request):
+    if request.method == 'POST':
+        form = AuthorForm(request.POST, request.FILES)
+        name = request.POST.get('name')
+        email_author = request.POST.get('email_author')
+        phone_author = request.POST.get('phone_author')
+        cni =  request.POST.get('cni')
+        author_profile =  request.POST.get('author_profile')
+        about_author =  request.POST.get('about_author')
+        ville= request.POST.get('ville')
+
+        
+        if form.is_valid():
+            form.save()
+            messages.success(request, ' Succsesfull')  # Success message
+            return redirect('F_register')
+        else:
+            messages.error(request, 'remplie tout les champs')  # Error message for missing fields
+    else:
+        form = AuthorForm()
+    
+    return render(request, 'Formateur/form_registre.html', {'form': form})

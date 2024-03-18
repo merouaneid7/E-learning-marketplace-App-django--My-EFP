@@ -21,14 +21,15 @@
 
 {% block content %}
 
-<div class="bg-white">
+
+<div class="bg-white ">
     <div>
         <div class="relative isolate px-6 pt-14 lg:px-8">
             <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
                 <div class="hidden sm:mb-8 sm:flex sm:justify-center">
-                    <div class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                        Skills for your present & your future. . <a href="http://127.0.0.1:8000/accounts/register" class="font-semibold text-black"><span class="absolute inset-0"
-                                aria-hidden="true"></span>Get started with us <span aria-hidden="true">&rarr;</span></a>
+                    <div class=" relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-blue-500/10 hover:ring-gray-900/20">
+                        Skills for your present & your future.  <a href="http://127.0.0.1:8000/accounts/register" class="font-semibold text-black"><span class="absolute inset-0"
+                                aria-hidden="true"></span>Get started with us <span aria-hidden="true" class="text-blue-600">&rarr;</span></a>
                     </div>
                 </div>
                 <div class="text-center">
@@ -73,7 +74,8 @@
                                     <img src="{{i.featured_image.url}}" alt="Image" class="w-full rounded-md mb-4">
                                 </div>
                                 <!-- Body -->
-                                <a href="{{i.get_absolute_url}}" class="text-inherit">
+
+                                <a  class="text-inherit">
                                     <h3 class="h5 text-xl font-bold">{{i.title}}</h3>
                                     <p class="text-muted mb-0 opacity-75">By {{i.author}}</p>
                                     <h3 class="h5 font-bold mb-5">
@@ -90,11 +92,20 @@
                                       {% endif %}
                                 </a>
                                 <!-- Buttons -->
+                                {% if user.is_authenticated %}
                                 <div class=" text-black">
                                     <a href="{{i.get_absolute_url}}" class="btn btn-link btn-sm px-0">
                                         Learn more →
                                     </a>
                                 </div>
+                                {% else %}
+                                <div class=" text-black">
+                                    <a href="http://127.0.0.1:8000/accounts/login/" class="btn btn-link btn-sm px-0">
+                                        Learn more →
+                                    </a>
+                                </div>
+                                {% endif %}
+                                
                             </div>
                         </div>
                         {% endfor %}
@@ -122,7 +133,7 @@
                             <i class="{{i.icon}}"></i>
                             <!-- Footer -->
                             <div class="card-footer px-0 pb-0 pt-4">
-                              <button type="button" class="w-15 h-15 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">{{i.name}}</button>
+                              <button type="button" class="w-15 h-15 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">{{i.name}}</button>
                             </div>
                         </div>
                     </a>
@@ -158,14 +169,14 @@
             <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-black">Become an instructor</h1>
             <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Instructors from around the world teach millions of learners on Udemy. We provide the tools and skills to teach what you love.</p>
             <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0">
-                <a href="#" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                <a href="http://127.0.0.1:8000/accounts/F_register" class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg  focus:ring-4 bg-gradient-to-br from-purple-600 to-blue-500">
                     Start teaching today →
                 </a>
                 
             </div>
         </div>
         <div>
-            <img class="mx-auto  lg:max-w-xl h-64 rounded-lg sm:h-96 " src="static\assets\img\instructor-1x-v3.jpg">
+            <img class="mx-auto  lg:max-w-xl h-64 rounded-lg sm:h-96 " src="static\assets\img\beinstiklearn.png">
             
         </div>
     </div>

@@ -1,0 +1,11 @@
+<!-- templates/formateur_form.html -->
+{% extends 'base1.html' %}
+
+{% block content %}
+<h2>Formateur Form</h2>
+<form method="post" action="{% url 'formateur_create' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Formateur</button>
+</form>
+{% endblock %}
